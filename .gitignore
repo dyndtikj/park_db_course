@@ -15,6 +15,7 @@
 # vendor/
 
 /bin/tp-dbms-forum-test-tool
+*.gz
 *.dat.gz
 *.dat
 tech-db-forum.best.txt
