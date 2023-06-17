@@ -37,19 +37,8 @@ func (h *userH) Create(ctx *fasthttp.RequestCtx) {
 	}
 	user.Nickname = ctx.UserValue("nickname").(string)
 
-	// TODO OPTIMIZE
-	//h.userRepo.GetByEmailOrNick(user.Email, user.Nickname)
-	user1, err1 := h.userRepo.GetByNickname(user.Nickname)
-	user2, err2 := h.userRepo.GetByEmail(user.Email)
-
-	if err1 == nil || err2 == nil {
-		var users []models.User
-		if err1 == nil {
-			users = append(users, user1)
-		}
-		if err2 == nil && user1.About != user2.About {
-			users = append(users, user2)
-		}
+	users, err := h.userRepo.GetByEmailOrNick(user.Email, user.Nickname)
+	if err == nil && len(users) > 0 {
 		ctx.SetContentType("application/json")
 		body, _ := json.Marshal(users)
 		ctx.SetStatusCode(http.StatusConflict)

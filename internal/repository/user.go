@@ -54,7 +54,7 @@ func (r *userRepo) GetByEmailOrNick(email, nickname string) (users []*models.Use
 
 	for rows.Next() {
 		u := &models.User{}
-		err = rows.Scan(&u.Nickname, &u.Fullname, &u.About, &u.Email)
+		err = rows.Scan(&u.Id, &u.Nickname, &u.Fullname, &u.About, &u.Email)
 		if err != nil {
 			return nil, err
 		}
