@@ -18,5 +18,6 @@
 *.dat.gz
 *.dat
 tech-db-forum.best.txt
+.DS_Store
 /.idea
 report.html
